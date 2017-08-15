@@ -89,10 +89,22 @@ class Dimensions {
    * @param {string} dim Name of dimension as defined when calling `set`.
    * @returns {Object?} Value for the dimension.
    */
+  
   static get(dim: string): Object {
-    invariant(dimensions[dim], 'No dimension set for key ' + dim);
-    return dimensions[dim];
+    if(dim != 'window'){   //大漠－－增加6s 默认值  ，应该是热更新导致的取不到屏幕
+       invariant(dimensions[dim], 'No dimension set for key ' + dim);
+    }
+    return dimensions[dim] || {
+        fontScale: 1,
+        height: 667,
+        scale: 2,
+        width: 375
+    };
+
+    // invariant(dimensions[dim], 'No dimension set for key ' + dim);
+    // return dimensions[dim];
   }
+
 
   /**
    * Add an event handler. Supported events:
